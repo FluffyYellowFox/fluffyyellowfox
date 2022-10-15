@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<script src="assignment3.js"></script>
+<body>
+
+
+  
+<b>CIS-255: Assignment 03 Fall 2022</b>
+
+<!-- 
+    03A, Takes input in one box, click button to trigger
+    function that converts F to C and puts it in the Celsius box.
+-->
+<p>Convert Fahrenheit to Celsius</p>
+ 
+<script>
+  function tempCalc() {
+    let temp = parseFloat(document.getElementById("fahrenheit").value);
+    document.getElementById("celsius").value = ((temp-32)*(5/9));
+  }
+</script> 
+<form id="tempForm"> 
+  <label for="fahrenheit">Fahrenheit:</label>
+  <input type="text" id="fahrenheit"> <br>
+  <label for="celsius">Celsius:</label>
+  <input type="text" id="celsius"> <br>
+  <button onclick="tempCalc(); return false;">Convert F to C</button>  
+<!--
+    I dont know why, but unless I have return false in the button, the button crashes the page and puts a ? at the end of the url. 
+!-->
+</form>
+<br>
+
+<p>Find GCD</p>
+
+<form id="gcdForm"> 
+<!--
+    Takes input, finds greatest common denominator of the two numbers entered, and displays it after clicking the button
+!-->
+  <label for="numberOne">Number One:</label>
+  <input type="text" id="numberOne"> <br>
+  <label for="numberTwo">Number Two:</label>
+  <input type="text" id="numberTwo"> <br>
+  <label for="gcdFinal">GCD:</label>
+  <input type="text" id="gcdFinal"> <br>
+  <button onclick="gcdCalc(); return false;">Find GCD</button>  
+</form>
+<br>
+
+<p>Sum of Digits</p>
+
+<form id="sumForm"> 
+<!--
+    Takes input, finds sum of entered number by taking off the last digit and summing it until all digits were added together
+!-->
+  <label for="sumNum">Number:</label>
+  <input type="text" id="sumNum"> <br>
+  <label for="sumFinal">Sum of Digits:</label>
+  <input type="text" id="sumFinal"> <br>
+  <button onclick="sumCalc(); return false;">Find Sum</button>  
+</form>
+<br>
+
+</body>
+</html>
