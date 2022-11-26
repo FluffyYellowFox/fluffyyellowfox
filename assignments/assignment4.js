@@ -37,7 +37,6 @@ let arcsum = Arr5.map(e => arctan(Math.PI,e)).reduce((accumulator, n) => accumul
 
 //Part 2
 let ctr = 0;
-covidData = null;
 function loadData() {
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
