@@ -27,7 +27,7 @@ let isleapyear = (n) => {if ((n%4)==0){return true;} else {return false;}}
 let timefallen = (d) => Math.sqrt((2*d)/9.807)
 
 //Map, Filter, Reduce
-let allLeapYears = Arr4.reduce((accumulator, years) => accumulator + years, 0);
+let allLeapYears = Arr4.filter(e => e%4==0).reduce((accumulator, years) => accumulator + years, 0);
 let fullNames = Arr3.map(e => e.fname+" "+e.lname);
 let dot = Arr1.map((e, i) => Arr1[i] * Arr2[i]).reduce((accumulator, n) => accumulator + n);
 let sumEven = Arr2.filter(e => e%2==0).reduce((accumulator, n) => accumulator + n);
