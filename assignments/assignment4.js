@@ -1,3 +1,10 @@
+/*
+	Javascript for various tasks and for displaying covid data
+	This hurt to make
+	@author Lukas Johnson 
+	@version 1.000.00.0.0000.0000
+*/
+
 //Arrays
 var Arr1 = [(Math.floor(Math.random()*1000)+100),(Math.floor(Math.random()*1000)+100),(Math.floor(Math.random()*1000)+100),(Math.floor(Math.random()*1000)+100),(Math.floor(Math.random()*1000)+100),(Math.floor(Math.random()*1000)+100),(Math.floor(Math.random()*1000)+100),(Math.floor(Math.random()*1000)+100),(Math.floor(Math.random()*1000)+100),(Math.floor(Math.random()*1000)+100)];
 var Arr2 = [(Math.floor(Math.random()*400)-200),(Math.floor(Math.random()*400)-200),(Math.floor(Math.random()*400)-200),(Math.floor(Math.random()*400)-200),(Math.floor(Math.random()*400)-200),(Math.floor(Math.random()*400)-200),(Math.floor(Math.random()*400)-200),(Math.floor(Math.random()*400)-200),(Math.floor(Math.random()*400)-200),(Math.floor(Math.random()*400)-200)];
@@ -27,22 +34,32 @@ let isleapyear = (n) => {if ((n%4)==0){return true;} else {return false;}}
 let timefallen = (d) => Math.sqrt((2*d)/9.807)
 
 //Map, Filter, Reduce
+//Use reduce to add every leapyear toegher
 let allLeapYears = Arr4.filter(e => e%4==0).reduce((accumulator, years) => accumulator + years, 0);
+//Use map to combine every first and last name
 let fullNames = Arr3.map(e => e.fname+" "+e.lname);
+//Use map and reduce to find the dot product of Arr1 and Arr2
 let dot = Arr1.map((e, i) => Arr1[i] * Arr2[i]).reduce((accumulator, n) => accumulator + n);
+//Use filter and reduce to add only the even numbers
 let sumEven = Arr2.filter(e => e%2==0).reduce((accumulator, n) => accumulator + n);
+//Use map to display all volumes of the spheres in Arr5 given their radii
 let fourVol = Arr5.map(e => sphrad(e));
+//Use map to compute time objects fall given distance
 let fallTimes = Arr6.map(e => timefallen(e));
+//Use map and reduce and arctan to find the sum of each values arctan in Arr5
 let arcsum = Arr5.map(e => arctan(Math.PI,e)).reduce((accumulator, n) => accumulator + n);
 
 //Part 2
+//Need this ctr for index scrolling
 let ctr = 0;
+//Import data
 function loadData() {
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       covidData = this.responseText
       covidData = JSON.parse(covidData);
+	  //Display initial data by changing the .value of each bootstrap form
       document.getElementById("text").value = covidData.Countries[ctr].ID;
       document.getElementById("text1").value = covidData.Countries[ctr].Country;
       document.getElementById("text2").value = covidData.Countries[ctr].CountryCode;
@@ -61,6 +78,7 @@ function loadData() {
   xhttp.send();
 }
 
+//Function to go back in the covidData index
 function previous (x) {
   if (x > 0) {
     ctr -=1;
@@ -78,6 +96,8 @@ function previous (x) {
   }
   
 }
+
+//Function to go forward in the covidData index
 function next (x) {
   ctr +=1;
   document.getElementById("text").value = covidData.Countries[x].ID;
