@@ -36,50 +36,60 @@ let fallTimes = Arr6.map(e => timefallen(e));
 let arcsum = Arr5.map(e => arctan(Math.PI,e)).reduce((accumulator, n) => accumulator + n);
 
 //Part 2
+let ctr = 0;
+covidData = null;
 function loadData() {
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       covidData = this.responseText
-      document.getElementById("demo").innerHTML = covidData;
       covidData = JSON.parse(covidData);
-      totalID =
-        covidData.Global.ID;
-      totalCountry =
-        covidData.Global.Country;
-      totalCountryCode =
-        covidData.Global.CountryCode;
-      totalSlug =
-        covidData.Global.Slug;
-      totalNewConfirmed =
-        covidData.Global.NewConfirmed;
-      totalConfirmed = 
-        covidData.Global.TotalConfirmed;
-      totalNewDeaths =
-        covidData.Global.NewDeaths;
-      totalDeaths =  
-        covidData.Global.TotalDeaths;
-      totalNewRecovered =
-        covidData.Global.NewRecovered;
-      totalRecovered =  
-        covidData.Global.TotalRecovered;
-      totalDate =
-        covidData.Global.Date;
+      document.getElementById("text").value = covidData.Countries[ctr].ID;
+      document.getElementById("text1").value = covidData.Countries[ctr].Country;
+      document.getElementById("text2").value = covidData.Countries[ctr].CountryCode;
+      document.getElementById("text3").value = covidData.Countries[ctr].Slug;
+      document.getElementById("text4").value = covidData.Countries[ctr].NewConfirmed;
+      document.getElementById("text5").value = covidData.Countries[ctr].TotalConfirmed;
+      document.getElementById("text6").value = covidData.Countries[ctr].NewDeaths;
+      document.getElementById("text7").value = covidData.Countries[ctr].TotalDeaths;
+      document.getElementById("text8").value = covidData.Countries[ctr].NewRecovered;
+      document.getElementById("text9").value = covidData.Countries[ctr].TotalRecovered;
+      document.getElementById("text10").value = covidData.Countries[ctr].Date;
     }
   };
   let url = "https://api.covid19api.com/summary";
   xhttp.open("GET", url, true);
   xhttp.send();
 }
-loadData();
 
-let counter = 0;
-
-function previous () {
-  if (counter > 0) {
-    counter -=1;
+function previous (x) {
+  if (x > 0) {
+    ctr -=1;
+      document.getElementById("text").value = covidData.Countries[x].ID;
+      document.getElementById("text1").value = covidData.Countries[x].Country;
+      document.getElementById("text2").value = covidData.Countries[x].CountryCode;
+      document.getElementById("text3").value = covidData.Countries[x].Slug;
+      document.getElementById("text4").value = covidData.Countries[x].NewConfirmed;
+      document.getElementById("text5").value = covidData.Countries[x].TotalConfirmed;
+      document.getElementById("text6").value = covidData.Countries[x].NewDeaths;
+      document.getElementById("text7").value = covidData.Countries[x].TotalDeaths;
+      document.getElementById("text8").value = covidData.Countries[x].NewRecovered;
+      document.getElementById("text9").value = covidData.Countries[x].TotalRecovered;
+      document.getElementById("text10").value = covidData.Countries[x].Date;
   }
+  
 }
-function next () {
-    counter +=1;
+function next (x) {
+  ctr +=1;
+  document.getElementById("text").value = covidData.Countries[x].ID;
+  document.getElementById("text1").value = covidData.Countries[x].Country;
+  document.getElementById("text2").value = covidData.Countries[x].CountryCode;
+  document.getElementById("text3").value = covidData.Countries[x].Slug;
+  document.getElementById("text4").value = covidData.Countries[x].NewConfirmed;
+  document.getElementById("text5").value = covidData.Countries[x].TotalConfirmed;
+  document.getElementById("text6").value = covidData.Countries[x].NewDeaths;
+  document.getElementById("text7").value = covidData.Countries[x].TotalDeaths;
+  document.getElementById("text8").value = covidData.Countries[x].NewRecovered;
+  document.getElementById("text9").value = covidData.Countries[x].TotalRecovered;
+  document.getElementById("text10").value = covidData.Countries[x].Date;
 }
