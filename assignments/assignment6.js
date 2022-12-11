@@ -88,7 +88,7 @@ function loadDoc() {
   });
     
   // set focus to first year: messes up codepen
-  // $("#loan_year01").focus();
+  $("#loan_year01").focus();
 
 } // end: function loadDoc()
 
