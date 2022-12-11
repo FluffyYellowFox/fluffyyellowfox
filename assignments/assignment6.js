@@ -1,4 +1,5 @@
 // ===== GLOBAL VARIABLES =====
+var app = angular.module('myApp', []);
 
 // default values
 let loans = [
@@ -158,7 +159,7 @@ let updateForm = () => {
 
 // ----- ANGULAR -----
 
-var app = angular.module('myApp', []);
+
 
 app.controller('myCtrl', function($scope) {
   $scope.payments = [];
