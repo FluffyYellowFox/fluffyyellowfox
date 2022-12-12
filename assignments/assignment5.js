@@ -1,6 +1,6 @@
-// ===== GLOBAL VARIABLES =====
+//Global Variables
 
-// default values
+//default values
 let loans = [
     { loan_year: 2020, loan_amount: 10000.00, loan_int_rate: 0.0453 },
     { loan_year: 2021, loan_amount: 10000.00, loan_int_rate: 0.0453 },
@@ -8,8 +8,11 @@ let loans = [
     { loan_year: 2023, loan_amount: 10000.00, loan_int_rate: 0.0453 },
     { loan_year: 2024, loan_amount: 10000.00, loan_int_rate: 0.0453 }
 ]; 
+//loan accumulator var
 let loanWithInterest = 0;
+//accumulated interest
 let int = 0;
+//array displaying each year's payments, interest, and yearly balance
 let payments;
 
 // ===== FUNCTIONS =====
@@ -18,25 +21,33 @@ let payments;
 
 // -------------------------------------------------------
 function toComma(value) {
+  //add commas, 100000 = 100,000
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 // -------------------------------------------------------
 let toMoney = (value) => {
+  //only allow 2 demical points, first dollar sign is escaped with backslash so $ goes through,
+  //second $ is the start of a template literal
   return `\$${toComma(value.toFixed(2))}`; 
 }
 
 // -------------------------------------------------------
 let saveForm = () => {
+  //save entered data to local storage
   localStorage.setItem(`as06`, JSON.stringify(loans));
 }
 
 // -------------------------------------------------------
 let loadForm = () => {
+  //load entered data from local storage
   if(localStorage.getItem(`as06`) != null){
+    //if data was saved
      loans = JSON.parse(localStorage.getItem(`as06`));
+    //update form function
      updateForm();
   } else {
+    //if no data was saved
      alert(`Error: no saved values`);
   }
 }
@@ -95,11 +106,20 @@ function loadDoc() {
 function updateLoansArray() {
   
   // regex tester web site: https://www.regexpal.com/
+  //accepts int years from 1900 to 2099
+  //cannot begin with zero
   let yearP = /^(19|20)\d{2}$/;
+  //accepts digits as well as 2 digits for decimals.
+  //cannot begin with zero, if there is a period, must have 1-2 digits too
   let amtP = /^([1-9][0-9]*)+(.[0-9]{1,2})?$/;
+  //accepts ints with more than one digit but no more than six
+  //when followed by period, voids above condition
+  //accepts "0." followed by up to 5 digits
   let intP = /^(0|)+(.[0-9]{1,5})?$/;
 
+  //assume input is valid
   let valid = true;
+  //if input is not numeric, make valid false and change input box bg to red
   if(!yearP.test($(`#loan_year01`).val())){
     valid = false;
     $(`#loan_year01`).css("background-color", "red");
@@ -115,7 +135,10 @@ function updateLoansArray() {
     $(`#loan_int01`).css("background-color", "red");
   }
 
+  //if data is checked and valid
   if(valid) {
+
+    //take valid numeric input and store it
     loans[0].loan_year = parseInt($("#loan_year01").val());
     for(var i=1; i<5; i++) {
       loans[i].loan_year = loans[0].loan_year + i;
@@ -137,6 +160,7 @@ function updateLoansArray() {
 
 // -------------------------------------------------------
 let updateForm = () => {
+  //refreshes loan information on the table
   loanWithInterest = 0;
   let totalAmt = 0;
   for(i = 1; i < 6; i++) {
@@ -158,6 +182,8 @@ let updateForm = () => {
 
 // ----- ANGULAR -----
 
+//when recalculate is clicked $scope.populate() updates $scope.payments
+//angular then updates expressions in {{}}
 var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope) {
