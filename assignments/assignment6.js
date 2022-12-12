@@ -1,6 +1,5 @@
 // ===== GLOBAL VARIABLES =====
 
-
 // default values
 let loans = [
     { loan_year: 2020, loan_amount: 10000.00, loan_int_rate: 0.0453 },
@@ -88,7 +87,7 @@ function loadDoc() {
   });
     
   // set focus to first year: messes up codepen
-  $("#loan_year01").focus();
+  // $("#loan_year01").focus();
 
 } // end: function loadDoc()
 
@@ -158,8 +157,8 @@ let updateForm = () => {
   
 
 // ----- ANGULAR -----
-var app = angular.module('myApp', []);
 
+var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope) {
   $scope.payments = [];
