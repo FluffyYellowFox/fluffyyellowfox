@@ -162,8 +162,11 @@ function updateLoansArray() {
 let updateForm = () => {
   //refreshes loan information on the table
   loanWithInterest = 0;
+  //reset loan with interest
   let totalAmt = 0;
+  //declare total amount
   for(i = 1; i < 6; i++) {
+    //fill the loans section
     $(`#loan_year0${i}`).val(loans[i - 1].loan_year);
     let amt = loans[i - 1].loan_amount;
     $(`#loan_amt0${i}`).val(amt);
@@ -187,33 +190,54 @@ let updateForm = () => {
 var app = angular.module('myApp', []);
 
 app.controller('myCtrl', function($scope) {
+  //fills the payments section
   $scope.payments = [];
+  //payments array
   $scope.populate = function () {
+    //scope function
     
     updateForm();
+    //update the loans portion
     
     let total = loanWithInterest;
+    //loan with interest
     let iRate = loans[0].loan_int_rate;
+    //interest rate
     let r = iRate / 12;
+    //frequency of payments
     let n = 11;
-    //loan payment formula
+    //number of payments
     //https://www.thebalance.com/loan-payment-calculations-315564
     let pay = 12 * (total / ((((1+r)**(n*12))-1)/(r *(1+r)**(n*12))));
+    //loan payment formula
     for (let i = 0; i < 10; i++) {
+      //for each year in ten years
       total -= pay 
+      //subtract payment from total
       let int = total * (iRate); 
+      //calculate amount of interest
       $scope.payments[i] = {
+        //display first ten of the V
         "year":loans[4].loan_year + i + 1,
+        //years
         "payment": toMoney(pay), 
+        //payments
         "amt": toMoney(int),
+        //interest amount
         "ye": toMoney(total += int)
+        //yearly balance
       }
     }
     $scope.payments[10] = {
+      //for the 11th payment, display V
       "year":loans[4].loan_year + 11,
+      //last year
       "payment": toMoney(total),
+      //last payment
       "amt": toMoney(0),
+      //interest paid off
       "ye":toMoney(0)
+      //balance left after loans
     }
   }
 });
